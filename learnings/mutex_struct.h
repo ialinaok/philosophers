@@ -5,26 +5,30 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <stdbool.h>
+// # include <sys/time.h>
 
 #define NUM 1000000UL
 
 typedef struct s_philo
 {
+	int			number_of_philo;
 	int			times_eaten;
-	bool		finished;
+	bool		finished_eating;
 	bool		*left_fork;
 	bool		*right_fork;
-	int			n_philo;
+	pthread_t	id;
 	struct s_philo		*next;
 	struct s_big_brother *big_ptr;
 }						t_philo;
 
 typedef struct s_big_brother
 {
+	int			philos_amount;
 	int			time_to_eat;
-	int			how_many_times;
+	int			how_many_meals;
 	int			finished_all;
-	struct s_philo		*first_philo;
+	long long	gong;
+	struct s_philo	*philo_list;
 }					t_big_brother;
 
 typedef struct s_forks

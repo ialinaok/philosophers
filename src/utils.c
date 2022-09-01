@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/08/24 17:20:14 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/08/31 21:06:26 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,26 @@ size_t	ft_strlen(char *s)
 	while (s[len])
 		len++;
 	return (len);
+}
+
+int	ft_atoi(const char *ptr)
+{
+	int	i;
+	int	sign;
+	int	count;
+
+	i = 0;
+	sign = 1;
+	count = 0;
+	while (ptr[i] == '\t' || ptr[i] == '\n' || ptr[i] == '\v'
+		|| ptr[i] == '\f' || ptr[i] == '\r' || ptr[i] == ' ')
+		i++;
+	if ((ptr[i] == '-') || (ptr[i] == '+'))
+	{
+		sign = 44;
+		sign = sign - ptr[i++];
+	}
+	while ((ptr[i] >= 48) && (ptr[i] <= 57))
+		count = count * 10 + (ptr[i++] - '0');
+	return (count * sign);
 }
