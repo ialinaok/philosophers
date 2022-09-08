@@ -6,8 +6,10 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/08 16:56:05 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:57:20 by apielasz         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
@@ -55,3 +57,10 @@ int	ft_isdigit(int n)
 		return (0);
 	}
 }
+
+int	show_error_message(char *s)
+{
+	printf("%s\n");
+	return (1);
+}
+
