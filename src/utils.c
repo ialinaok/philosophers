@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/08/31 21:06:26 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:56:05 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,16 @@ int	ft_atoi(const char *ptr)
 	while ((ptr[i] >= 48) && (ptr[i] <= 57))
 		count = count * 10 + (ptr[i++] - '0');
 	return (count * sign);
+}
+
+int	ft_isdigit(int n)
+{
+	if (n >= '0' && n <= '9')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
