@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
+#    By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/08/24 17:08:49 by apielasz         ###   ########.fr        #
+#    Updated: 2022/09/06 11:06:07 by ialinaok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ INC_DIR = inc/
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g -I
 
-SRC =
+SRC = $(SRC_DIR)main.c \
+		$(SRC_DIR)time.c \
+		$(SRC_DIR)utils.c
 
 # takes all named source files and converts them to .o files in the /obj directory
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

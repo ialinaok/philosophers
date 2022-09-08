@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/08/31 21:06:26 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:24:22 by ialinaok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,10 @@ int	ft_atoi(const char *ptr)
 	while ((ptr[i] >= 48) && (ptr[i] <= 57))
 		count = count * 10 + (ptr[i++] - '0');
 	return (count * sign);
+}
+
+int	show_error_message(char *s)
+{
+	printf("%s\n");
+	return (1);
 }
