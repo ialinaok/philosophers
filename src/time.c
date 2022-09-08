@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:23:33 by ialinaok          #+#    #+#             */
-/*   Updated: 2022/09/06 11:03:51 by ialinaok         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:02:12 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
 /**
- * function returns the current time in ms
+ * @brief function returns the current time in ms
+ * @return is current time in miliseconds
  */
 
 long long	time_now(void)
@@ -27,9 +28,11 @@ long long	time_now(void)
 }
 
 /**
- * function calculates the time passed from the
+ * 
+ * @brief function calculates the time passed from the
  * given time to current time
  * @param time is the given time
+ * @return is the time passed
  */
 
 long long	time_passed(long long time)

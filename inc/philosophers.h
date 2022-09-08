@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/06 11:04:47 by ialinaok         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:19:07 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,20 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define MAX_INT 2147483647
+
 /*
 	* basic
 	! yeah 
 	? blue
 	TODO still todo
 */
+
+/**
+ * @brief struct assigned to every philosopher
+ * @param n_philo is philo's 'id'
+ * @param id is an id of a thread
+ */
 
 typedef struct s_philo
 {
@@ -34,10 +42,20 @@ typedef struct s_philo
 	bool		*left_fork;
 	bool		*right_fork;
 	pthread_t	id;
-	struct s_big_brother *big_ptr;
+	struct s_data *data_ptr;
 }						t_philo;
 
-typedef struct s_big_brother
+/**
+ * @brief an overall struct with global data
+ * @param n_philos is a total number of philos
+ * @param finished_all is a status checker of all of
+ * philosophers meal progress. it's mutexed.
+ * @param start is the beginning of the simulation
+ * @param philo_list is a pointer to the first philosopher
+ * (philosophers are in an array)
+ */
+
+typedef struct s_data
 {
 	int			n_philos;
 	int			time_to_eat;
@@ -45,16 +63,17 @@ typedef struct s_big_brother
 	int			time_to_sleep;
 	int			n_meals;
 	int			finished_all;
-	long long	gong;
-	struct s_philo	*philo_list;
-}					t_big_brother;
+	long long	start;
+	struct s_philo	philos_arr[250];
+}					t_data;
 
 // main.c
 
 // utils.c
 size_t	ft_strlen(char *s);
-int	ft_atoi(const char *ptr);
-int	show_error_message(char *s);
+long	ft_atoli(const char *ptr);
+int		ft_isdigit(int n);
+int		err_msg(char *s);
 
 // time.c
 long long	time_now(void);

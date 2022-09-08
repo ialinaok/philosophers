@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/08 16:57:20 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:10:59 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,18 @@ size_t	ft_strlen(char *s)
 	return (len);
 }
 
-int	ft_atoi(const char *ptr)
+/**
+ * @brief function converts the initial portion of the string
+ * pointed to by ptr to int representation
+ * @param ptr 
+ * @return long 
+ */
+
+long	ft_atoli(const char *ptr)
 {
-	int	i;
-	int	sign;
-	int	count;
+	int		i;
+	int		sign;
+	long	count;
 
 	i = 0;
 	sign = 1;
@@ -46,6 +53,12 @@ int	ft_atoi(const char *ptr)
 	return (count * sign);
 }
 
+/**
+ * @brief function tests for a decimal digit character
+ * @param n is the character to be checked
+ * @return 1 if char is a digit, 0 if not
+ */
+
 int	ft_isdigit(int n)
 {
 	if (n >= '0' && n <= '9')
@@ -58,9 +71,15 @@ int	ft_isdigit(int n)
 	}
 }
 
-int	show_error_message(char *s)
+/**
+ * @brief function takes a string, prints it
+ * as error message and returns -1
+ * @param s wanted error message
+ * @return error int
+ */
+
+int	err_msg(char *s)
 {
 	printf("%s\n");
-	return (1);
+	return (-1);
 }
-
