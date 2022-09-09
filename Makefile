@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+         #
+#    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/09/06 11:06:07 by ialinaok         ###   ########.fr        #
+#    Updated: 2022/09/09 19:03:19 by apielasz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,11 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 INC_DIR = inc/
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -I
+CFLAGS = -Wall -Werror -Wextra -g -I -pthread
 
-SRC = $(SRC_DIR)main.c \
+SRC = $(SRC_DIR)init.c \
+		$(SRC_DIR)main.c \
+		$(SRC_DIR)philo.c \
 		$(SRC_DIR)time.c \
 		$(SRC_DIR)utils.c
 
@@ -27,7 +29,7 @@ OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 # prevents rules from being considered as files
 .PHONY: all clean fclean re
 
-all: $(NAME) credit
+all: $(NAME) # credit
 
 # creates subdirectory /obj
 # makes sure to make a /obj dir before compiling .o files

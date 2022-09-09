@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/08 21:19:07 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:03:52 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include <stdio.h>
+# include <unistd.h>
 # include <string.h>
 # include <stdbool.h>
 # include <pthread.h>
@@ -36,14 +37,21 @@
 
 typedef struct s_philo
 {
-	int			n_philo;
-	int			times_eaten;
-	// bool		finished_meals; - might be not needed when I compare the amount of meals
-	bool		*left_fork;
-	bool		*right_fork;
-	pthread_t	id;
-	struct s_data *data_ptr;
+	int				n_philo;
+	int				times_eaten;
+	// bool			finished_meals; - might be not needed when I compare the amount of meals
+	long long		last_meal;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_t		id;
+	struct s_data	*data_ptr;
 }						t_philo;
+
+typedef struct s_fork
+{
+	int	i;
+	pthread_mutex_t	fork; 
+}					t_fork;
 
 /**
  * @brief an overall struct with global data
@@ -62,21 +70,31 @@ typedef struct s_data
 	int			time_to_die;
 	int			time_to_sleep;
 	int			n_meals;
-	int			finished_all;
+	// int			finished_all; - might not be necessary if I compare with nmeals in the condition
 	long long	start;
-	struct s_philo	philos_arr[250];
+	struct s_philo	philo_arr[250];
+	struct s_fork	fork_arr[250];
 }					t_data;
 
 // main.c
+
+// init.c
+int	check_size(int argc, char **argv);
+int	check_input(int argc, char **argv);
+int	init(t_data *data, int argc, char **argv);
+
+// philo.c
+void	*routine(void *arg);
+int	create_threads(t_data *data);
+
+// time.c
+long long	time_now(void);
+long long	time_passed(long long time);
 
 // utils.c
 size_t	ft_strlen(char *s);
 long	ft_atoli(const char *ptr);
 int		ft_isdigit(int n);
 int		err_msg(char *s);
-
-// time.c
-long long	time_now(void);
-long long	time_passed(long long time);
 
 #endif

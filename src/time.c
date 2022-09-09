@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:23:33 by ialinaok          #+#    #+#             */
-/*   Updated: 2022/09/08 17:02:12 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:02:36 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ long long	time_passed(long long time)
 {
 	long long		time_passed;
 	long long		current_time;
-	struct timeval	tv;
+	// struct timeval	tv;
 
 	time_passed = 0;
-	current_time = time_now;
+	current_time = (long long) time_now;
 	time_passed = current_time - time;
 	return (time_passed);
 }

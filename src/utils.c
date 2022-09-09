@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/08 21:10:59 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:02:51 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int	ft_isdigit(int n)
 
 int	err_msg(char *s)
 {
-	printf("%s\n");
+	printf("%s\n", s);
 	return (-1);
 }
