@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:23:33 by ialinaok          #+#    #+#             */
-/*   Updated: 2022/09/09 19:02:36 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/10 15:43:15 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ long long	time_now(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (ms);
 }
 
