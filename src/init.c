@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 09:53:53 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/09 19:05:58 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/11 13:35:31 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,17 @@ int	check_input(int argc, char **argv)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
+	i = 1;
 	if (argc < 5 || argc > 6)
 		return (err_msg("wrong number of arguments. 🤷‍♀️\n"));
-// checks for negative values
-	while (argv[i] != NULL)
+	while (argv[i] != NULL) // checks for negative values
 	{
 		if (argv[i][0] == '-')
 			return (err_msg("negative values? srsly? 🙅‍♀️\n"));
 		i++;
 	}
-	i = 0;
-// checks for alpha chars
-	while (argv[i] != NULL)
+	i = 1;
+	while (argv[i] != NULL) // checks for alpha chars
 	{
 		j = 0;
 		while (argv[i][j])
@@ -70,17 +67,13 @@ int	check_input(int argc, char **argv)
 		}
 		i++;
 	}
-// checks for proper sizes of values
-	if (check_size(argc, argv) == -1)
+	if (check_size(argc, argv) == -1) // checks for proper sizes of values
 		return (-1);
 	return (0);
 }
 
-int	init(t_data *data, int argc, char **argv)
+void	load_struct(t_data *data, int argc, char **argv)
 {
-	int	i;
-
-	i = 0;
 	data->n_philos = (int) ft_atoli(argv[1]);
 	data->time_to_die = (int) ft_atoli(argv[2]);
 	data->time_to_eat = (int) ft_atoli(argv[3]);
@@ -89,6 +82,16 @@ int	init(t_data *data, int argc, char **argv)
 		data->n_meals = (int) ft_atoli(argv[5]);
 	else
 		data->n_meals = -1;
+}
+
+int	init(t_data *data, int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	load_struct(data, argc, argv);
+	data->philo_arr = malloc (sizeof(t_philo) * data->n_philos);
+	data->fork_arr = malloc (sizeof(t_fork) * data->n_philos);
 	while (i < data->n_philos)
 	{
 		data->philo_arr[i].n_philo = i;

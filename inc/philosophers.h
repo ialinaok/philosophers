@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/09 19:03:52 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/11 13:43:26 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include <string.h>
 # include <stdbool.h>
 # include <pthread.h>
@@ -72,8 +73,8 @@ typedef struct s_data
 	int			n_meals;
 	// int			finished_all; - might not be necessary if I compare with nmeals in the condition
 	long long	start;
-	struct s_philo	philo_arr[250];
-	struct s_fork	fork_arr[250];
+	struct s_philo	*philo_arr;
+	struct s_fork	*fork_arr;
 }					t_data;
 
 // main.c
