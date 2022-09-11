@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:37 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/09 18:37:21 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/11 15:00:01 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init(&data, argc, argv) == -1)
 		return (2);
-	if (create_threads(&data) == -1)
+	if (start_simulation(&data) == -1)
 		return (3);
 }

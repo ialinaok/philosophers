@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 09:53:53 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/11 13:35:31 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/11 16:49:33 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ int	check_size(int argc, char **argv)
 	t_die = ft_atoli(argv[2]);
 	t_eat = ft_atoli(argv[3]);
 	t_sleep = ft_atoli(argv[4]);
-	// n_meals = -1;
 	if (argc == 6)
 		n_meals = ft_atoli(argv[5]);
-	if (n_philos > 250 || n_philos < 1)
-		return (err_msg("too little or too many philosophers! 🙆‍♀️\n"));
+	if (n_philos < 1)
+		return (err_msg("that's too little philosophers 🙆‍♀️\n"));
 	if (t_die == 0 || t_eat == 0 || t_sleep == 0)
 		return (err_msg("you can't give zeros, dude. 🙅‍♀️\n"));
 	if (t_die > MAX_INT || t_eat > MAX_INT || t_sleep > MAX_INT)
@@ -72,30 +71,21 @@ int	check_input(int argc, char **argv)
 	return (0);
 }
 
-void	load_struct(t_data *data, int argc, char **argv)
-{
-	data->n_philos = (int) ft_atoli(argv[1]);
-	data->time_to_die = (int) ft_atoli(argv[2]);
-	data->time_to_eat = (int) ft_atoli(argv[3]);
-	data->time_to_sleep = (int) ft_atoli(argv[4]);
-	if (argc == 6)
-		data->n_meals = (int) ft_atoli(argv[5]);
-	else
-		data->n_meals = -1;
-}
-
 int	init(t_data *data, int argc, char **argv)
 {
 	int	i;
 
 	i = 0;
 	load_struct(data, argc, argv);
-	data->philo_arr = malloc (sizeof(t_philo) * data->n_philos);
-	data->fork_arr = malloc (sizeof(t_fork) * data->n_philos);
+	pthread_mutex_init(&(data->done_lock), NULL);
+	data->philo_arr = malloc (sizeof(t_philo *) * data->n_philos);
+	data->fork_arr = malloc (sizeof(t_fork *) * data->n_philos);
+	data->done = false;
 	while (i < data->n_philos)
 	{
 		data->philo_arr[i].n_philo = i;
 		data->philo_arr[i].data_ptr = data;
+		data->philo_arr[i].last_meal = current_time();
 		if (pthread_mutex_init(&(data->fork_arr[i].fork), NULL) != 0)
 			return (-1);
 		data->philo_arr[i].right_fork = &(data->fork_arr[i].fork);
@@ -106,4 +96,16 @@ int	init(t_data *data, int argc, char **argv)
 		i++;
 	}
 	return (0);
+}
+
+void	load_struct(t_data *data, int argc, char **argv)
+{
+	data->n_philos = (int) ft_atoli(argv[1]);
+	data->time_to_die = (int) ft_atoli(argv[2]);
+	data->time_to_eat = (int) ft_atoli(argv[3]);
+	data->time_to_sleep = (int) ft_atoli(argv[4]);
+	if (argc == 6)
+		data->n_meals = (int) ft_atoli(argv[5]);
+	else
+		data->n_meals = -1;
 }
