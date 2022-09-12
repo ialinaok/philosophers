@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/11 17:41:46 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:39:54 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_data
 	int				n_meals;
 	long long		start;
 	int				who_finished;
+	pthread_mutex_t	check_meals_lock;
 	bool			done;
 	pthread_mutex_t	done_lock;
 	struct s_philo	*philo_arr;

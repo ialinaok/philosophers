@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 18:37:34 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/11 16:28:30 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:03:12 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,56 @@ void	*routine(void *arg)
 		usleep(70);
 	while (check_done(data) == false)
 	{
-		pick_forks();
-		philo_eat();
+		pick_forks(philo);
+		philo_eat(philo);
 		philo_sleep();
 		philo_think();
 	}
+}
+
+void	pick_forks(t_philo *philo)
+{
+	t_data	*data;
+
+	data = philo->data_ptr;
+	pthread_mutex_lock(&(philo->left_fork));
+	pthread_mutex_lock(&(data->done_lock));
+	if (data->done == false)
+		printf("%10ld\t%d\thas taken a left fork ⭕️\n", \
+		time_now() - data->start, philo->n_philo + 1);
+	pthread_mutex_unlock(&(data->done_lock));
+	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(&(data->done_lock));
+	if (data->done == false)
+		printf("%10ld\t%d\thas taken a right fork 🔴\n", \
+		time_now() - data->start, philo->n_philo + 1);
+	pthread_mutex_unlock(&(data->done_lock));
+}
+
+void	philo_eat(t_philo *philo)
+{
+	t_data		*data;
+	long long	finish;
+
+	data = philo->data_ptr;
+	pthread_mutex_lock(&(data->check_meals_lock));
+	philo->last_meal = time_now();
+	pthread_mutex_lock(&(data->done));
+	if (data->done == false)
+		printf("%10ld\t%d\tis eating 🍧\n", \
+		time_now() - data->start, philo->n_philo + 1);
+	philo->times_eaten++;
+	pthread_mutex_unlock(&(data->done_lock));
+	finish = time_now() + data->time_to_eat; //not sure where to put it...
+	while (time_now() < finish)
+	{
+		if (to_eat_or_not_to_eat(data) == 0) // have this function in every activity of the philo! sleeping and thinking too
+			return ;
+		usleep(100);
+	}
+}
+
+void	philo_sleep(t_philo *philo)
+{
+	
 }
