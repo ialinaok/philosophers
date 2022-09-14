@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/14 17:38:14 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/14 21:28:43 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		*routine(void *arg);
 void		pick_forks(t_philo *philo);
 bool		philo_eat(t_philo *philo);
 bool		philo_sleep_think(t_philo *philo);
+void		*one_philo_case(t_data *data);
 
 // threads.c
 int			start_simulation(t_data *data);

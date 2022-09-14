@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 09:53:53 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/14 18:05:37 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/14 21:28:53 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	init(t_data *data, int argc, char **argv)
 	load_struct(data, argc, argv);
 	pthread_mutex_init(&(data->be_or_not_lock), NULL);
 	pthread_mutex_init(&(data->check_meals_lock), NULL);
-	data->philo_arr = malloc (sizeof(t_philo *) * data->n_philos);
+	data->philo_arr = malloc(sizeof(t_philo *) * data->n_philos);
 	i = 0;
 	while (i < data->n_philos)
 	{
@@ -88,7 +88,7 @@ int	init(t_data *data, int argc, char **argv)
 	}
 	if (!data->philo_arr)
 		return (-1);
-	data->fork_arr = malloc (sizeof(pthread_mutex_t *) * data->n_philos);
+	data->fork_arr = malloc(sizeof(pthread_mutex_t *) * data->n_philos);
 	if (!data->fork_arr)
 		return (-1);
 	data->be_or_not = true;
