@@ -6,7 +6,7 @@
 #    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/09/14 11:23:19 by apielasz         ###   ########.fr        #
+#    Updated: 2022/09/14 17:51:14 by apielasz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 INC_DIR = inc/
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -I -pthread
+CFLAGS = -Wall -Werror -Wextra -I -pthread # -g -fsanitize=address
 
 SRC = $(SRC_DIR)init.c \
 		$(SRC_DIR)main.c \

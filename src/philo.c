@@ -6,11 +6,26 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 18:37:34 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/14 11:22:48 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:28:30 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
+
+void	*routine_basic(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *) arg;
+	if (philo->n_philo % 2 == 0)
+		usleep(10 * 1000);
+	printf("philosopher [%d] starts eating 😋\n", philo->n_philo);
+	printf("philosopher [%d] starts eating 😋\n", philo->n_philo + 1);
+	usleep(philo->data_ptr->time_to_eat);
+	printf("philosopher [%d] finished eating 🤰\n", philo->n_philo);
+	printf("philosopher [%d] finished eating 🤰\n", philo->n_philo + 1);
+	return (NULL);
+}
 
 bool	to_be_or_not_to_be(t_data *data) // is true for continuing simulation, false for breaking it
 {
@@ -18,7 +33,7 @@ bool	to_be_or_not_to_be(t_data *data) // is true for continuing simulation, fals
 
 	pthread_mutex_lock(&(data->be_or_not_lock));
 	status = data->be_or_not;
-	pthread_mutex_lock(&(data->be_or_not_lock));
+	pthread_mutex_unlock(&(data->be_or_not_lock));
 	return (status);
 }
 
@@ -35,10 +50,17 @@ void	*routine(void *arg)
 	{
 		pick_forks(philo);
 		if (philo_eat(philo) == false)
+		{
+			printf("I am %d and quitting eat\n", philo->n_philo);
 			return (NULL);
+		}
 		if (philo_sleep_think(philo) == false)
+		{
+			printf("I am %d and quitting sleep/think\n", philo->n_philo);
 			return (NULL);
+		}
 	}
+	printf("I am %d and quitting\n", philo->n_philo);
 	return (NULL);
 }
 

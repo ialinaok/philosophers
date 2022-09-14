@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 09:53:53 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/14 11:28:52 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:05:37 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,32 @@ int	init(t_data *data, int argc, char **argv)
 	i = 0;
 	load_struct(data, argc, argv);
 	pthread_mutex_init(&(data->be_or_not_lock), NULL);
+	pthread_mutex_init(&(data->check_meals_lock), NULL);
 	data->philo_arr = malloc (sizeof(t_philo *) * data->n_philos);
+	i = 0;
+	while (i < data->n_philos)
+	{
+		data->philo_arr[i] = malloc(sizeof(t_philo));
+		i++;
+	}
 	if (!data->philo_arr)
 		return (-1);
 	data->fork_arr = malloc (sizeof(pthread_mutex_t *) * data->n_philos);
 	if (!data->fork_arr)
 		return (-1);
-	data->be_or_not = false;
+	data->be_or_not = true;
+	i = 0;
 	while (i < data->n_philos)
 	{
-		data->philo_arr[i].n_philo = i;
-		data->philo_arr[i].data_ptr = data;
-		data->philo_arr[i].last_meal = time_now();
+		data->philo_arr[i]->n_philo = i;
+		data->philo_arr[i]->data_ptr = data;
 		if (pthread_mutex_init(&(data->fork_arr[i]), NULL) != 0)
 			return (-1);
-		data->philo_arr[i].right_fork = &(data->fork_arr[i]);
+		data->philo_arr[i]->right_fork = &(data->fork_arr[i]);
 		if (i == data->n_philos - 1)
-			data->philo_arr[i].left_fork = &(data->fork_arr[0]);
+			data->philo_arr[i]->left_fork = &(data->fork_arr[0]);
 		else
-			data->philo_arr[i].left_fork = &(data->fork_arr[i + 1]);
+			data->philo_arr[i]->left_fork = &(data->fork_arr[i + 1]);
 		i++;
 	}
 	return (0);
