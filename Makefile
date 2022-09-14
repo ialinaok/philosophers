@@ -6,7 +6,7 @@
 #    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/09/09 19:03:19 by apielasz         ###   ########.fr        #
+#    Updated: 2022/09/14 11:23:19 by apielasz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CFLAGS = -Wall -Werror -Wextra -g -I -pthread
 SRC = $(SRC_DIR)init.c \
 		$(SRC_DIR)main.c \
 		$(SRC_DIR)philo.c \
+		$(SRC_DIR)threads.c \
 		$(SRC_DIR)time.c \
 		$(SRC_DIR)utils.c
 

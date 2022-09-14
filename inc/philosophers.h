@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/12 20:39:54 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/14 11:28:02 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ typedef struct s_philo
 	struct s_data	*data_ptr;
 }						t_philo;
 
-typedef struct s_fork
-{
-	int				i;
-	pthread_mutex_t	fork;
-}					t_fork;
-
 /**
  * @brief an overall struct with global data
  * @param n_philos is a total number of philos
@@ -75,10 +69,10 @@ typedef struct s_data
 	long long		start;
 	int				who_finished;
 	pthread_mutex_t	check_meals_lock;
-	bool			done;
-	pthread_mutex_t	done_lock;
+	bool			be_or_not;
+	pthread_mutex_t	be_or_not_lock;
 	struct s_philo	*philo_arr;
-	struct s_fork	*fork_arr;
+	pthread_mutex_t	*fork_arr;
 }					t_data;
 
 // main.c
@@ -95,12 +89,20 @@ void		*unlimited(void *arg);
 void		*limited(void *arg);
 
 // philo.c
-bool		check_done(t_data *data);
+bool		to_be_or_not_to_be(t_data *data);
 void		*routine(void *arg);
+void		pick_forks(t_philo *philo);
+bool		philo_eat(t_philo *philo);
+bool		philo_sleep_think(t_philo *philo);
+
+// threads.c
+int			start_simulation(t_data *data);
+void		*unlimited(void *arg);
+void		*limited(void *arg);
+int			end_simulation(t_data *data);
 
 // time.c
 long long	time_now(void);
-long long	time_passed(long long time);
 
 // utils.c
 long		ft_atoli(const char *ptr);
