@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:41:20 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 20:22:42 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/15 21:31:32 by ialinaok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,85 +43,6 @@ int	start_simulation(t_data *data)
 		pthread_create(&big_brother, NULL, &limited, data);
 	pthread_join(big_brother, NULL);
 	return (0);
-}
-
-void	*unlimited(void *arg)
-{
-	int			i;
-	t_data		*data;
-
-	data = (t_data *) arg;
-	while (23)
-	{
-		i = 0;
-		if (to_be_or_not_to_be(data) == false)
-			return (NULL);
-		while (i < data->n_philos)
-		{
-			pthread_mutex_lock(&(data->be_or_not_lock));
-			if (check_if_dead(data, data->philo_arr[i]) == false)
-				return (NULL);
-			pthread_mutex_unlock(&(data->be_or_not_lock));
-			i++;
-		}
-	}
-	return (NULL);
-}
-
-bool	check_if_dead(t_data *data, t_philo philo)
-{
-	long long	time_passed;
-
-	pthread_mutex_lock(&(data->check_meals_lock));
-	time_passed = time_now() - philo.last_meal;
-	pthread_mutex_unlock(&(data->check_meals_lock));
-	if (time_passed >= data->time_to_die && data->be_or_not == true)
-	{
-		printf("%10lld\t%d\tdied 😵\n", time_now() - data->start, \
-		philo.n_philo + 1);
-		data->be_or_not = false;
-		pthread_mutex_unlock(&(data->be_or_not_lock));
-		return (false);
-	}
-	return (true);
-}
-
-void	*limited(void *arg)
-{
-	int			i;
-	t_data		*data;
-	long long	time_passed;
-
-	data = (t_data *) arg;
-	while (23)
-	{
-		i = 0;
-		if (to_be_or_not_to_be(data) == false)
-			return (NULL);
-		while (i < data->n_philos)
-		{
-			pthread_mutex_lock(&(data->be_or_not_lock));
-			if (check_if_dead(data, data->philo_arr[i]) == false)
-				return (NULL);
-			if (check_if_full(data) == false)
-				return (NULL);
-			pthread_mutex_unlock(&(data->be_or_not_lock));
-			i++;
-		}
-	}
-	return (NULL);
-}
-
-bool	check_if_full(t_data *data)
-{
-	if (data->who_finished == data->n_philos \
-		&& data->be_or_not == true)
-	{
-		data->be_or_not = false;
-		pthread_mutex_unlock(&(data->be_or_not_lock));
-		return (false);
-	}
-	return (true);
 }
 
 int	end_simulation(t_data *data)

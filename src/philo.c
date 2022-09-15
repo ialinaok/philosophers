@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 18:37:34 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 19:57:33 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/15 21:30:12 by ialinaok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
-
-bool	to_be_or_not_to_be(t_data *data)
-{
-	bool	status;
-
-	pthread_mutex_lock(&(data->be_or_not_lock));
-	status = data->be_or_not;
-	pthread_mutex_unlock(&(data->be_or_not_lock));
-	return (status);
-}
 
 void	*routine(void *arg)
 {
@@ -65,12 +55,14 @@ bool	philo_eat(t_philo *philo)
 	data = philo->data_ptr;
 	pthread_mutex_lock(&(data->check_meals_lock));
 	philo->last_meal = time_now();
-	pthread_mutex_unlock(&(data->check_meals_lock));
 	pthread_mutex_lock(&(data->be_or_not_lock));
 	if (data->be_or_not == true)
 		printf("%10lld\t%d\tis eating 🍧\n", \
 		time_now() - data->start, philo->n_philo + 1);
 	philo->times_eaten++;
+	if (philo->times_eaten == data->n_meals)
+		data->who_finished++;
+	pthread_mutex_unlock(&(data->check_meals_lock));
 	pthread_mutex_unlock(&(data->be_or_not_lock));
 	finish = time_now() + data->time_to_eat;
 	while (time_now() < finish)

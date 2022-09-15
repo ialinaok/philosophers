@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 19:31:10 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/15 21:37:26 by ialinaok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,45 +71,41 @@ typedef struct s_data
 	pthread_mutex_t	check_meals_lock;
 	bool			be_or_not;
 	pthread_mutex_t	be_or_not_lock;
-	// struct s_philo	**philo_arr;
 	struct s_philo	philo_arr[200];
 	pthread_mutex_t	*fork_arr;
 }					t_data;
 
 // main.c
-void	*routine_basic(void *arg);
+int			check_size(int argc, char **argv);
+int			check_number(char **argv);
+int			check_input(int argc, char **argv);
 
 // init.c
-int			check_size(int argc, char **argv);
-int			check_input(int argc, char **argv);
 int			init(t_data *data, int argc, char **argv);
 void		load_struct(t_data *data, int argc, char **argv);
 
-// threads.c
-int			start_simulation(t_data *data);
-void		*unlimited(void *arg);
-void		*limited(void *arg);
-
 // philo.c
-bool		to_be_or_not_to_be(t_data *data);
 void		*routine(void *arg);
 void		pick_forks(t_philo *philo);
 bool		philo_eat(t_philo *philo);
 bool		philo_sleep_think(t_philo *philo);
 void		*one_philo_case(t_data *data);
 
-// threads.c
-int			start_simulation(t_data *data);
+// supervising.c
+bool		to_be_or_not_to_be(t_data *data);
 void		*unlimited(void *arg);
 void		*limited(void *arg);
-int			end_simulation(t_data *data);
+bool		check_if_dead(t_data *data, t_philo philo);
+bool		check_if_full(t_data *data);
 
-// time.c
-long long	time_now(void);
+// threads.c
+int			start_simulation(t_data *data);
+int			end_simulation(t_data *data);
 
 // utils.c
 long		ft_atoli(const char *ptr);
 int			ft_isdigit(int n);
 int			err_msg(char *s);
+long long	time_now(void);
 
 #endif

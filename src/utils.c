@@ -3,13 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/11 15:00:38 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/15 21:36:27 by ialinaok         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
@@ -68,4 +66,19 @@ int	err_msg(char *s)
 {
 	printf("%s\n", s);
 	return (-1);
+}
+
+/**
+ * @brief function returns the current time in ms
+ * @return is current time in miliseconds
+ */
+
+long long	time_now(void)
+{
+	long long		ms;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (ms);
 }

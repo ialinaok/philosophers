@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:37 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 19:54:21 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/15 21:17:30 by ialinaok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_size(int argc, char **argv)
 	return (0);
 }
 
-int	check_number(int argc, char **argv)
+int	check_number(char **argv)
 {
 	int	i;
 	int	j;
@@ -64,7 +64,6 @@ int	check_number(int argc, char **argv)
 int	check_input(int argc, char **argv)
 {
 	int	i;
-	int	j;
 
 	i = 1;
 	if (argc < 5 || argc > 6)
@@ -75,7 +74,7 @@ int	check_input(int argc, char **argv)
 			return (err_msg("negative values? srsly? 🙅‍♀️\n"));
 		i++;
 	}
-	if (check_number(argc, argv) == -1)
+	if (check_number(argv) == -1)
 		return (-1);
 	if (check_size(argc, argv) == -1)
 		return (-1);
