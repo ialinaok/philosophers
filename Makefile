@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
+#    By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/09/15 19:44:03 by apielasz         ###   ########.fr        #
+#    Updated: 2022/09/15 21:44:08 by ialinaok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ GREEN = \033[0;32m
 SRC = $(SRC_DIR)init.c \
 		$(SRC_DIR)main.c \
 		$(SRC_DIR)philo.c \
+		$(SRC_DIR)supervising.c \
 		$(SRC_DIR)threads.c \
-		$(SRC_DIR)time.c \
 		$(SRC_DIR)utils.c
 
 # takes all named source files and converts them to .o files in the /obj directory
