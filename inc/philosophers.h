@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/14 21:28:43 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:31:10 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ typedef struct s_data
 	pthread_mutex_t	check_meals_lock;
 	bool			be_or_not;
 	pthread_mutex_t	be_or_not_lock;
-	struct s_philo	**philo_arr;
+	// struct s_philo	**philo_arr;
+	struct s_philo	philo_arr[200];
 	pthread_mutex_t	*fork_arr;
 }					t_data;
 
