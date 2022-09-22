@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:41:20 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 21:31:32 by ialinaok         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:59:46 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	start_simulation(t_data *data)
 	else
 		pthread_create(&big_brother, NULL, &limited, data);
 	pthread_join(big_brother, NULL);
+	// pthread_detach(big_brother);
 	return (0);
 }
 
@@ -52,7 +53,8 @@ int	end_simulation(t_data *data)
 	i = 0;
 	while (i < data->n_philos)
 	{
-		pthread_detach(data->philo_arr[i].id);
+		pthread_join(data->philo_arr[i].id, NULL);
+		// pthread_detach(data->philo_arr[i].id);
 		printf("%dth philosopher's thread finished execution.\n", \
 		data->philo_arr[i].n_philo + 1);
 		i++;

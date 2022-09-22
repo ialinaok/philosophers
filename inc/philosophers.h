@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 21:37:26 by ialinaok         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:27:46 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool		philo_sleep_think(t_philo *philo);
 void		*one_philo_case(t_data *data);
 
 // supervising.c
-bool		to_be_or_not_to_be(t_data *data);
+bool		to_be_or_not_to_be(t_data *data, int philo);
 void		*unlimited(void *arg);
 void		*limited(void *arg);
 bool		check_if_dead(t_data *data, t_philo philo);
