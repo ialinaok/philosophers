@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:41:20 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/22 16:59:46 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:23:43 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	start_simulation(t_data *data)
 		pthread_mutex_unlock(&(data->check_meals_lock));
 		pthread_create(&(data->philo_arr[i].id), NULL, &routine, \
 		&(data->philo_arr[i]));
-		printf("%dth philosopher's thread started.\n", \
-		data->philo_arr[i].n_philo + 1);
+		// printf("%dth philosopher's thread started.\n", \
+		// data->philo_arr[i].n_philo + 1);
 		i++;
 	}
 	if (data->n_meals == -1)
@@ -55,8 +55,8 @@ int	end_simulation(t_data *data)
 	{
 		pthread_join(data->philo_arr[i].id, NULL);
 		// pthread_detach(data->philo_arr[i].id);
-		printf("%dth philosopher's thread finished execution.\n", \
-		data->philo_arr[i].n_philo + 1);
+		// printf("%dth philosopher's thread finished execution.\n", \
+		// data->philo_arr[i].n_philo + 1);
 		i++;
 	}
 	i = 0;

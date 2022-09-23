@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 21:30:20 by ialinaok          #+#    #+#             */
-/*   Updated: 2022/09/22 20:16:34 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:25:17 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	*limited(void *arg)
 	t_data		*data;
 
 	data = (t_data *) arg;
-	while (69)
+	while (23)
 	{
+		// printf("🌸\n");
 		i = 0;
 		if (to_be_or_not_to_be(data, 23) == false)
 			return (NULL);
@@ -101,6 +102,12 @@ bool	check_if_dead(t_data *data, t_philo philo)
 bool	check_if_full(t_data *data)
 {
 	pthread_mutex_lock(&(data->be_or_not_lock));
+	if (data->n_meals == 0)
+	{
+		data->be_or_not = false;
+		pthread_mutex_unlock(&(data->be_or_not_lock));
+		return (false);
+	}
 	if (data->who_finished == data->n_philos \
 		&& data->be_or_not == true)
 	{

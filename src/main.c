@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:37 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 21:17:30 by ialinaok         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:13:40 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ int	check_size(int argc, char **argv)
 	if (argc == 6)
 		n_meals = ft_atoli(argv[5]);
 	if (n_philos < 1)
-		return (err_msg("that's too little philosophers 🙆‍♀️\n"));
-	if (t_die == 0 || t_eat == 0 || t_sleep == 0)
-		return (err_msg("you can't give zeros, dude. 🙅‍♀️\n"));
+		return (err_msg("✖️ that's too little philosophers. ✖️\n"));
+	if (n_philos > 200)
+		return (err_msg("✖️ that's too many philosophers. ✖️\n"));
+	// if (t_eat == 0 || t_sleep == 0)
+	// 	return (err_msg("✖️ you can't give zeros, dude. ✖️"));
 	if (t_die > MAX_INT || t_eat > MAX_INT || t_sleep > MAX_INT)
-		return (err_msg("given values are too big. 💁‍♀️\n"));
-	if (argc == 6 && (n_meals < 1 || n_meals > MAX_INT))
-		return (err_msg("wrong number of meals. just wrong. 🙅‍♀️\n"));
+		return (err_msg("✖️ given values are too big. ✖️\n"));
+	// if (argc == 6 && (n_meals < 1 || n_meals > MAX_INT))
+	if (argc == 6 && n_meals > MAX_INT)
+		return (err_msg("✖️ wrong number of meals. just wrong. ✖️\n"));
 	return (0);
 }
 
@@ -53,7 +56,7 @@ int	check_number(char **argv)
 		while (argv[i][j])
 		{
 			if (ft_isdigit(argv[i][j]) == 0)
-				return (err_msg("only numbers, please. 💁‍♀️\n"));
+				return (err_msg("✖️ only numbers, please. ✖️\n"));
 			j++;
 		}
 		i++;
@@ -67,11 +70,11 @@ int	check_input(int argc, char **argv)
 
 	i = 1;
 	if (argc < 5 || argc > 6)
-		return (err_msg("wrong number of arguments. 🤷‍♀️\n"));
+		return (err_msg("✖️ wrong number of arguments. ✖️\n"));
 	while (argv[i] != NULL)
 	{
 		if (argv[i][0] == '-')
-			return (err_msg("negative values? srsly? 🙅‍♀️\n"));
+			return (err_msg("✖️ negative values? srsly? ✖️\n"));
 		i++;
 	}
 	if (check_number(argv) == -1)

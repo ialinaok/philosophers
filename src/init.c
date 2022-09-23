@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 09:53:53 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 19:54:40 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:33:32 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init(t_data *data, int argc, char **argv)
 	{
 		data->philo_arr[i].n_philo = i;
 		data->philo_arr[i].data_ptr = data;
+		data->philo_arr[i].times_eaten = 0;
 		if (pthread_mutex_init(&(data->fork_arr[i]), NULL) != 0)
 			return (-1);
 		data->philo_arr[i].right_fork = &(data->fork_arr[i]);
@@ -47,8 +48,11 @@ void	load_struct(t_data *data, int argc, char **argv)
 	data->time_to_die = (int) ft_atoli(argv[2]);
 	data->time_to_eat = (int) ft_atoli(argv[3]);
 	data->time_to_sleep = (int) ft_atoli(argv[4]);
+	if (data->time_to_sleep == 0)
+		data->time_to_sleep = 10;
 	if (argc == 6)
 		data->n_meals = (int) ft_atoli(argv[5]);
 	else
 		data->n_meals = -1;
+	data->who_finished = 0;
 }
