@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/22 16:27:46 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:24:43 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool		philo_sleep_think(t_philo *philo);
 void		*one_philo_case(t_data *data);
 
 // supervising.c
-bool		to_be_or_not_to_be(t_data *data, int philo);
+bool		to_be_or_not_to_be(t_data *data);
 void		*unlimited(void *arg);
 void		*limited(void *arg);
 bool		check_if_dead(t_data *data, t_philo philo);
@@ -107,5 +107,6 @@ long		ft_atoli(const char *ptr);
 int			ft_isdigit(int n);
 int			err_msg(char *s);
 long long	time_now(void);
+bool		give_back_forks_and_return(t_philo *philo, bool ret);
 
 #endif

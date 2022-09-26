@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/15 21:36:27 by ialinaok         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:24:20 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,19 @@ long long	time_now(void)
 	gettimeofday(&tv, NULL);
 	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (ms);
+}
+
+/**
+ * @brief function takes a philo struct and a return value as a parameter, 
+ * unlocks philosopher's fork mutexes and returns the given value. 
+ * created thanks to norminette complaining about two lines too much.
+ * @return true signals to continue simulation
+ * @return false signals to stop simulation
+ */
+
+bool	give_back_forks_and_return(t_philo *philo, bool ret)
+{
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	return (ret);
 }

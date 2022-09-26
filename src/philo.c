@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 18:37:34 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/23 16:47:58 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:25:13 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ void	*routine(void *arg)
 	data = philo->data_ptr;
 	if (data->n_philos == 1)
 		return (one_philo_case(data));
-	if (philo->n_philo % 2 == 0)
+	if (philo->n_philo % 2 == 0 && data->time_to_eat < 1000)
 		usleep(data->time_to_eat * 1000);
-	while (to_be_or_not_to_be(data, philo->n_philo) == true)
+	else if (philo->n_philo % 2 == 0 && data->time_to_eat > 1000)
+		usleep(1000);
+	while (to_be_or_not_to_be(data) == true)
 	{
 		if (data->n_meals == 0)
 			break ;
-		if (to_be_or_not_to_be(data, 12) == true)
+		if (to_be_or_not_to_be(data) == true)
 			pick_forks(philo);
 		if (philo_eat(philo) == false)
 			return (NULL);
@@ -42,17 +44,12 @@ void	pick_forks(t_philo *philo)
 	t_data	*data;
 
 	data = philo->data_ptr;
-	// if (philo->n_philo % 2 == 0)
-	// 	usleep(data->time_to_eat * 1000);
-		// usleep(1000);
-	// printf("philo %d tries to take right fork\n", philo->n_philo + 1);
 	pthread_mutex_lock(philo->right_fork);
-	if (to_be_or_not_to_be(data, 15) == true)
+	if (to_be_or_not_to_be(data) == true)
 		printf("%10lld\t%d\thas taken a right fork ⭕️\n", \
 		time_now() - data->start, philo->n_philo + 1);
-	// printf("philo %d tries to take left fork\n", philo->n_philo + 1);
 	pthread_mutex_lock(philo->left_fork);
-	if (to_be_or_not_to_be(data, philo->n_philo) == true)
+	if (to_be_or_not_to_be(data) == true)
 		printf("%10lld\t%d\thas taken a left fork 🔴\n", \
 		time_now() - data->start, philo->n_philo + 1);
 }
@@ -63,10 +60,8 @@ bool	philo_eat(t_philo *philo)
 	long long	finish;
 
 	data = philo->data_ptr;
-	// printf("philo %d nomnomnonmonm\n", philo->n_philo + 1);
 	pthread_mutex_lock(&(data->check_meals_lock));
 	philo->last_meal = time_now();
-	// printf("philo %d tbontb\n", philo->n_philo + 1);
 	pthread_mutex_lock(&(data->be_or_not_lock));
 	if (data->be_or_not == true && data->n_meals != 0)
 	{
@@ -77,25 +72,15 @@ bool	philo_eat(t_philo *philo)
 	if (philo->times_eaten == data->n_meals)
 		data->who_finished++;
 	pthread_mutex_unlock(&(data->check_meals_lock));
-	// printf("philo %d nomnomnom unlock\n", philo->n_philo + 1);
 	pthread_mutex_unlock(&(data->be_or_not_lock));
-	// printf("philo %d tbontb unlock\n", philo->n_philo + 1);
 	finish = philo->last_meal + data->time_to_eat;
 	while (time_now() < finish)
 	{
-		if (to_be_or_not_to_be(data, philo->n_philo) == false)
-		{
-			pthread_mutex_unlock(philo->right_fork);
-			pthread_mutex_unlock(philo->left_fork);
-			return (false);
-		}
+		if (to_be_or_not_to_be(data) == false)
+			give_back_forks_and_return(philo, false);
 		usleep(1000);
 	}
-	pthread_mutex_unlock(philo->right_fork);
-	// printf("philo %d returned right fork %d\n", philo->n_philo + 1, philo->n_philo + 1);
-	pthread_mutex_unlock(philo->left_fork);
-	// printf("philo %d returned left fork %d\n", philo->n_philo + 1, philo->n_philo + 2);
-	return (true);
+	return (give_back_forks_and_return(philo, true));
 }
 
 bool	philo_sleep_think(t_philo *philo)
@@ -104,27 +89,23 @@ bool	philo_sleep_think(t_philo *philo)
 	long long	wake;
 
 	data = philo->data_ptr;
-	// printf("philo %d tbontb lock\n", philo->n_philo + 1);
 	pthread_mutex_lock(&(data->be_or_not_lock));
 	if (data->be_or_not == true)
 		printf("%10lld\t%d\tis sleeping 💤\n", \
 		time_now() - data->start, philo->n_philo + 1);
 	pthread_mutex_unlock(&(data->be_or_not_lock));
-	// printf("philo %d tbontb unlock\n", philo->n_philo + 1);
 	wake = time_now() + data->time_to_sleep;
 	while (time_now() < wake)
 	{
-		if (to_be_or_not_to_be(data, philo->n_philo) == false)
+		if (to_be_or_not_to_be(data) == false)
 			return (false);
 		usleep(100);
 	}
-	// printf("philo %d tbontb lock\n", philo->n_philo + 1);
 	pthread_mutex_lock(&(data->be_or_not_lock));
 	if (data->be_or_not == true)
 		printf("%10lld\t%d\tis thinking 🧠\n", \
 		time_now() - data->start, philo->n_philo + 1);
 	pthread_mutex_unlock(&(data->be_or_not_lock));
-	// printf("philo %d tbontb unlock\n", philo->n_philo + 1);
 	return (true);
 }
 
