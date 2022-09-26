@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 18:37:34 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/26 15:25:13 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:54:19 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ bool	philo_sleep_think(t_philo *philo)
 	{
 		if (to_be_or_not_to_be(data) == false)
 			return (false);
-		usleep(100);
+		usleep(1000);
 	}
 	pthread_mutex_lock(&(data->be_or_not_lock));
 	if (data->be_or_not == true)

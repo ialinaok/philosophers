@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 21:30:20 by ialinaok          #+#    #+#             */
-/*   Updated: 2022/09/26 15:26:44 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/26 16:56:00 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	*unlimited(void *arg)
 		i = 0;
 		if (to_be_or_not_to_be(data) == false)
 			return (NULL);
-		while (i++ < data->n_philos)
+		while (i < data->n_philos)
 		{
 			if (check_if_dead(data, data->philo_arr[i]) == false)
 				return (NULL);
+			i++;
 		}
 	}
 	return (NULL);
@@ -51,7 +52,7 @@ void	*limited(void *arg)
 	while (23)
 	{
 		i = 0;
-		if (to_be_or_not_to_be(data, 23) == false)
+		if (to_be_or_not_to_be(data) == false)
 			return (NULL);
 		while (i < data->n_philos)
 		{
