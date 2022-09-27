@@ -6,7 +6,7 @@
 #    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/09/27 14:32:44 by apielasz         ###   ########.fr        #
+#    Updated: 2022/09/27 14:46:01 by apielasz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 INC_DIR = inc/
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I -pthread -g -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -I -pthread -g #-fsanitize=thread
 GREEN = \033[0;32m
 PINK = \033[0;35m
 
