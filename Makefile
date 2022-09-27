@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ialinaok <ialinaok@student.42.fr>          +#+  +:+       +#+         #
+#    By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/24 15:41:12 by apielasz          #+#    #+#              #
-#    Updated: 2022/09/15 21:44:08 by ialinaok         ###   ########.fr        #
+#    Updated: 2022/09/27 14:32:44 by apielasz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INC_DIR = inc/
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -I -pthread -g -fsanitize=thread
 GREEN = \033[0;32m
+PINK = \033[0;35m
 
 SRC = $(SRC_DIR)init.c \
 		$(SRC_DIR)main.c \
@@ -31,7 +32,7 @@ OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 # prevents rules from being considered as files
 .PHONY: all clean fclean re
 
-all: $(NAME) # credit
+all: $(NAME) credit
 
 # creates subdirectory /obj
 # makes sure to make a /obj dir before compiling .o files
@@ -44,7 +45,6 @@ $(OBJ): $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # directories in which they were found, and the value of ‘$@’ is the target.
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
-	@echo "$(GREEN)>>>SUCCESSFULLY COMPILED!<<<$(UNDO_COL)"
 
 # removes all object files and the /obj directory and cleans libft
 clean:
@@ -57,36 +57,23 @@ fclean: clean
 # re-makes the whole compilation from scratch
 re: fclean all
 
-# credit:
-# 	@echo "\n"
-# 	@echo "                        #%%%%/,..*#%%%%.                              "
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-# 	@echo
-	                                                              
-#                                  #%%%%/,..*#%%%%.                              
-#                                %%,                %%%                           
-#                             *%#                      %%                         
-#                            %%                         .%,                       
-#                           %%                        .  .%,                      
-#                          .%.                ,%%%/   %,  %%                      
-#                          *%   .%%%#       %%  (%   .%.  %%                      
-#                          %%   *%    &%%  %% %%     %%   %%                      
-#                         %%     %% %%% %% %%%      %%   %%                       
-#                        %%       %%%*.#%% %%%%%%%%,    %%                        
-#                        #%%%(           %%%           %.                         
-#                            %.          (%,          %%                          
-#                            %%          ,%           %%                          
-#                            /%         #%/           %%                          
-#                              ,#######.              &%                          
-                                                          
+credit:
+	@echo "\n"
+	@echo "$(PINK)  (@.                      *@@@@@*                          "
+	@echo "$(PINK) @@@@@@@@@@@@&         @@@@@@@@@@@@@@@                      "
+	@echo "$(PINK)  @@@@/       @@@@#@@@@@@@@@@@@@@@@@@@@@@@                  "
+	@echo "$(PINK)    @@@@         @@@@@@@@@@@@@@@@@@@@@@@@@@@                "
+	@echo "$(PINK)       @@@     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@              "
+	@echo "$(PINK)          @@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@             "
+	@echo "$(PINK)             @@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@             "
+	@echo "$(PINK)             @@@ @@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@            "
+	@echo "$(PINK)             @@@@@@@ @@@ @@@@@@@@@@@@@@@@@@@@@@@            "
+	@echo "$(PINK)              @@@@@@@@@@ @@@.@@@@@@@@@@@@@@@@@@ @.          "
+	@echo "$(PINK)               @@@@@@@@@@@@@ @@@@ @@@@@@@@@@@@   @@@@       "
+	@echo "$(PINK)                @@@@@@@@@@@@@@@@% @@@@ @@@@@@       @@@,    "
+	@echo "$(PINK)                  @@@@@@@@@@@@@@@@@@@, @@@@#          @@@@  "
+	@echo "$(PINK)                     @@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@"
+	@echo "$(PINK)                          *@@@@@*                  @@@@@@@@@"
+	@echo "\n"
+	@echo "$(GREEN)>>>     SUCCESSFULLY COMPILED!     <<<$(UNDO_COL)"
+# @echo "\n"

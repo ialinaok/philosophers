@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:54 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/26 15:24:43 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:31:48 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_die;
 	int				time_to_sleep;
+	bool			sleep_or_not;
 	int				n_meals;
 	long long		start;
 	int				who_finished;

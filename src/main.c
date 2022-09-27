@@ -6,14 +6,23 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:15:37 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/26 15:18:11 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:30:24 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
-// number of philos - argv[1], time to die - argv[2] etc,
-// to eat[3], to sleep[4], number of meals[5]
+/* argv[1] - number of philos, argv[2] - time to die,
+ to eat[3], to sleep[4], number of meals[5] */
+
+/**
+ * @brief function takes the arguments that were given to the program
+ * and checks if the given values are correct
+ * 
+ * @param argc arg from main function
+ * @param argv arg from main function
+ * @return int -1 if given values are not correct
+ */
 
 int	check_size(int argc, char **argv)
 {
@@ -40,6 +49,13 @@ int	check_size(int argc, char **argv)
 	return (0);
 }
 
+/**
+ * @brief function takes if given arguments contain only numbers
+ * 
+ * @param argv arg from main function
+ * @return int -1 if other characters than digits were found
+ */
+
 int	check_number(char **argv)
 {
 	int	i;
@@ -60,6 +76,15 @@ int	check_number(char **argv)
 	}
 	return (0);
 }
+
+/**
+ * @brief function takes arguments from the main and checks if comply
+ * with the rules given by subject
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 
 int	check_input(int argc, char **argv)
 {

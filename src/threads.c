@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:41:20 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/26 15:16:08 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:31:17 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /**
  * @brief function creates philosopher threads in a loop, as well as
- * waits for all of the 'philosophers' (threads) to finish
+ * the supervising threads. Waits for the supervising thread to finish.
+ * 
  * @param data struct with all data
  * @return int 0 on success
  */
@@ -42,6 +43,14 @@ int	start_simulation(t_data *data)
 	pthread_join(big_brother, NULL);
 	return (0);
 }
+
+/**
+ * @brief function waits for philosopher's threads to finish execution. 
+ * Destroys the mutexes and frees the memory that was allocated for forks.
+ * 
+ * @param data struct with data
+ * @return int 
+ */
 
 int	end_simulation(t_data *data)
 {

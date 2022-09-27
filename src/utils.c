@@ -6,7 +6,7 @@
 /*   By: apielasz <apielasz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:19:23 by apielasz          #+#    #+#             */
-/*   Updated: 2022/09/26 15:24:20 by apielasz         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:31:32 by apielasz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**
  * @brief function converts the initial portion of the string
  * pointed to by ptr to int representation
+ * 
  * @param ptr 
  * @return long 
  */
@@ -43,6 +44,7 @@ long	ft_atoli(const char *ptr)
 
 /**
  * @brief function tests for a decimal digit character
+ * 
  * @param n is the character to be checked
  * @return 1 if char is a digit, 0 if not
  */
@@ -58,6 +60,7 @@ int	ft_isdigit(int n)
 /**
  * @brief function takes a string, prints it
  * as error message and returns -1
+ * 
  * @param s wanted error message
  * @return error int
  */
@@ -70,6 +73,7 @@ int	err_msg(char *s)
 
 /**
  * @brief function returns the current time in ms
+ * 
  * @return is current time in miliseconds
  */
 
@@ -86,7 +90,8 @@ long long	time_now(void)
 /**
  * @brief function takes a philo struct and a return value as a parameter, 
  * unlocks philosopher's fork mutexes and returns the given value. 
- * created thanks to norminette complaining about two lines too much.
+ * created thanks to norminette bitching about two lines too much.
+ * 
  * @return true signals to continue simulation
  * @return false signals to stop simulation
  */
